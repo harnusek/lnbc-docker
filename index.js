@@ -5,7 +5,9 @@ const port = 9000;
 const axios = require("axios");
 
 app.get("/", (req, res) => {
-  const host = "http://0.0.0.0:3003";
+  console.log(req.hostname);
+
+  const host = "http://btcpay-server_web_1";
   let config = {
     method: "get",
     maxBodyLength: Infinity,
@@ -17,6 +19,7 @@ app.get("/", (req, res) => {
     .request(config)
     .then((response) => {
       const localUrl = response.request.res.responseUrl;
+      console.log(localUrl);
       const url = localUrl.replace(host, "https://btc.hrn.sk");
       res.redirect(url);
     })
